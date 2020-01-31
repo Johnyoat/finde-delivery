@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/circle"
+        android:src="@drawable/dots_horizontal"
+        android:layout_margin="32dp"
+        android:id="@+id/dots"
+        android:alpha="0.8"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To : Richard Kafui"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_toEndOf="@id/dots"
+        android:layout_marginTop="16dp"
+        android:id="@+id/deliveryPerson"
+        android:layout_marginBottom="8dp"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:src="@drawable/circle_outline"
+        android:layout_below="@id/deliveryPerson"
+        android:layout_toEndOf="@id/dots"
+        android:id="@+id/startIcon"
+        android:tint="@color/red"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="16dp"
+        android:layout_below="@id/startIcon"
+        android:rotation="90"
+        android:id="@+id/divider"
+        android:layout_toEndOf="@+id/dots"
+        android:layout_marginStart="5dp"
+        android:layerType="software"
+        android:background="@drawable/vertical_line_dash"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:src="@drawable/ic_location_pin"
+        android:layout_below="@+id/divider"
+        android:layout_toEndOf="@id/dots"
+        android:id="@+id/destinationIcon"
+        android:tint="@color/green"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Patasi"
+        android:layout_toEndOf="@+id/startIcon"
+        android:layout_below="@+id/deliveryPerson"
+        android:layout_marginTop="-2dp"
+        android:layout_marginStart="8dp"
+        android:id="@+id/startLocation"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Satantsi"
+        android:layout_toEndOf="@+id/destinationIcon"
+        android:layout_below="@id/divider"
+        android:layout_marginStart="8dp"
+        android:id="@+id/destinationLocation"
+        android:layout_marginTop="-2dp"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:cardCornerRadius="8dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/imagePlaceHolder">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/dm_bg"
+                android:scaleType="centerCrop"
+                android:id="@+id/ImageIcon" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/litGray"
+        android:layout_below="@id/imagePlaceHolder"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="108dp"/>
+
+</RelativeLayout>

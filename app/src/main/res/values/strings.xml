@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Finde Delivery</string>
+    <string name="map_box_token" translatable="false">pk.eyJ1Ijoiam9obnlvYXQiLCJhIjoiY2s2MWRzd3hhMDJrODNrcGp3YWgxbnFpbCJ9.sB72h3WL9M5Umlzd00amJA</string>
 </resources>
