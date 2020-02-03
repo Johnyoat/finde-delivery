@@ -3,6 +3,8 @@ package com.finde.deliveryapp
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
+import com.finde.deliveryapp.ui.NewParcelFragment
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.Style
@@ -13,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mapView: MapView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Mapbox.getInstance(this,getString(R.string.map_box_token))
+        Mapbox.getInstance(this, getString(R.string.map_box_token))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mapView = findViewById(R.id.mapView)
@@ -23,15 +25,22 @@ class MainActivity : AppCompatActivity() {
             mapboxMap.uiSettings.isAttributionEnabled = false
 
 
-            mapboxMap.setStyle(Style.MAPBOX_STREETS
+            mapboxMap.setStyle(
+                Style.MAPBOX_STREETS
             ) { }
         }
 
-        parcel.setOnClickListener{
-            startActivity(Intent(this,DeliveryActivity::class.java))
+        parcel.setOnClickListener {
+            startActivity(Intent(this, DeliveryActivity::class.java))
         }
-        parcel2.setOnClickListener{
-            startActivity(Intent(this,DeliveryActivity::class.java))
+        parcel2.setOnClickListener {
+            startActivity(Intent(this, DeliveryActivity::class.java))
+        }
+
+        sendParcel.setOnClickListener {
+            val newParcel = NewParcelFragment()
+            newParcel.setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme)
+            newParcel.show(supportFragmentManager, "")
         }
     }
 
