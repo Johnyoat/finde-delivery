@@ -19,7 +19,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To : Richard Kafui"
+        android:text="@string/dummy_person"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:layout_toEndOf="@id/dots"
@@ -60,7 +60,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Patasi"
+        android:text="@string/patasi"
         android:layout_toEndOf="@+id/startIcon"
         android:layout_below="@+id/deliveryPerson"
         android:layout_marginTop="-2dp"
@@ -71,7 +71,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Satantsi"
+        android:text="@string/satantsi"
         android:layout_toEndOf="@+id/destinationIcon"
         android:layout_below="@id/divider"
         android:layout_marginStart="8dp"

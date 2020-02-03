@@ -1,21 +1,19 @@
 package com.finde.deliveryapp
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.mapbox.mapboxsdk.Mapbox
+import androidx.appcompat.widget.AppCompatButton
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.Style
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_delivery.*
 
-class MainActivity : AppCompatActivity() {
+class DeliveryActivity : AppCompatActivity() {
 
     private lateinit var mapView: MapView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Mapbox.getInstance(this,getString(R.string.map_box_token))
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_delivery)
         mapView = findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
 
@@ -23,12 +21,13 @@ class MainActivity : AppCompatActivity() {
             mapboxMap.uiSettings.isAttributionEnabled = false
 
 
-            mapboxMap.setStyle(Style.MAPBOX_STREETS
+            mapboxMap.setStyle(
+                Style.MAPBOX_STREETS
             ) { }
         }
 
-        parcel.setOnClickListener{
-            startActivity(Intent(this,DeliveryActivity::class.java))
+        cancelBtn.setOnClickListener {
+            finish()
         }
     }
 
@@ -67,3 +66,4 @@ class MainActivity : AppCompatActivity() {
         mapView.onSaveInstanceState(outState)
     }
 }
+

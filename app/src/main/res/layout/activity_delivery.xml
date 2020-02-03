@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DeliveryActivity">
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:padding="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:layout_width="16dp"
+            android:layout_height="96dp"
+            android:id="@+id/loc"
+            android:orientation="vertical"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_horizontal">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/circle_outline"
+                android:tint="@color/red"
+                android:layout_marginTop="12dp"/>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.1"
+                android:background="@color/litGray"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_location_pin"
+                android:tint="@color/blue"
+                android:layout_marginBottom="12dp"/>
+
+
+        </LinearLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/startLocation"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/gray_border_line"
+            android:backgroundTint="@color/litGray"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:text="@string/patasi"
+            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:layout_toEndOf="@id/loc"/>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/destinationLocation"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/startLocation"
+            android:layout_alignStart="@id/startLocation"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/gray_border_line"
+            android:backgroundTint="@color/litGray"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:text="@string/satantsi"
+            android:textSize="16sp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancelBtn"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/destinationLocation"
+            android:layout_alignStart="@id/destinationLocation"
+            android:layout_marginTop="16dp"
+            android:text="Cancel"
+            android:textColor="@color/red"
+            android:textSize="16sp"
+            android:gravity="center_vertical"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/detailsBtn"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/destinationLocation"
+            android:layout_alignEnd="@id/destinationLocation"
+            android:layout_marginTop="16dp"
+            android:text="Details"
+            android:textColor="@color/blue"
+            android:textSize="16sp" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:translationZ="2dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/info"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_margin="16dp"
+                android:src="@drawable/kwame"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kwame Franklin"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:id="@+id/RiderName"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rating 4.8"
+                    android:id="@+id/riderRating"/>
+
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/callBtn"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/gray_border_line"
+                android:text="Call"
+                android:textColor="@color/blue"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/estimatedTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/info"
+            android:background="@color/blue"
+            android:padding="16dp"
+            android:text="Biker will arrive in 4mins"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraTargetLat="6.692015"
+        mapbox:mapbox_cameraTargetLng="-1.622962"
+        mapbox:mapbox_cameraTilt="50.25"
+        mapbox:mapbox_cameraZoom="14"
+        mapbox:mapbox_cameraZoomMin="6"
+        mapbox:mapbox_uiRotateGestures="false" />
+
+
+</RelativeLayout>
