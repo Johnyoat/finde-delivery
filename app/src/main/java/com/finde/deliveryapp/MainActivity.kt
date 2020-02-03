@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.Style
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.parcels_ui.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +28,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         parcel.setOnClickListener{
+            startActivity(Intent(this,DeliveryActivity::class.java))
+        }
+        parcel2.setOnClickListener{
             startActivity(Intent(this,DeliveryActivity::class.java))
         }
     }

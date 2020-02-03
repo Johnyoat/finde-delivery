@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="108dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:background="@drawable/circle"
         android:src="@drawable/dots_horizontal"
-        android:layout_margin="32dp"
+        android:layout_margin="26dp"
         android:id="@+id/dots"
-        android:alpha="0.8"/>
+        android:alpha="0.6"
+        android:layout_centerVertical="true"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
@@ -40,12 +41,12 @@
         android:layout_width="1dp"
         android:layout_height="16dp"
         android:layout_below="@id/startIcon"
-        android:rotation="90"
+        android:rotation="180"
         android:id="@+id/divider"
         android:layout_toEndOf="@+id/dots"
         android:layout_marginStart="5dp"
         android:layerType="software"
-        android:background="@drawable/vertical_line_dash"/>
+        android:background="@color/litGray"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="12dp"
@@ -80,8 +81,8 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         app:cardCornerRadius="8dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
@@ -105,8 +106,8 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/litGray"
-        android:layout_below="@id/imagePlaceHolder"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="108dp"/>
+        android:layout_alignStart="@id/destinationLocation"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>
