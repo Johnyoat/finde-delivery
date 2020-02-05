@@ -6,9 +6,17 @@ import androidx.lifecycle.ViewModel
 import com.finde.deliveryapp.models.ParcelModel
 
 class ParcelsViewModel : ViewModel() {
-    private val parcels = MutableLiveData<List<ParcelModel>>()
+    private val parcels = MutableLiveData<MutableList<ParcelModel>>()
 
-    fun getParcels():LiveData<List<ParcelModel>>{
+    fun getParcels():LiveData<MutableList<ParcelModel>>{
         return parcels
+    }
+
+    fun setParcel(parcelModels: MutableList<ParcelModel>){
+        parcels.value = parcelModels
+    }
+
+    fun addParcel(parcelModel: ParcelModel){
+        parcels.value?.add(parcelModel)
     }
 }

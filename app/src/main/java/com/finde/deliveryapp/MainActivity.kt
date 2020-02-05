@@ -1,14 +1,21 @@
 package com.finde.deliveryapp
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
+import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
+import com.finde.deliveryapp.adapters.RecentParcelAdapter
+import com.finde.deliveryapp.models.ParcelModel
 import com.finde.deliveryapp.ui.NewParcelFragment
+import com.finde.deliveryapp.viewModels.ParcelsViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mapbox.android.core.location.*
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
@@ -24,6 +31,7 @@ import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.parcel_item.*
 import kotlinx.android.synthetic.main.parcels_ui.*
 import java.lang.ref.WeakReference
 
@@ -55,12 +63,30 @@ class MainActivity : AppCompatActivity(), PermissionsListener {
             }
         }
 
-        parcel.setOnClickListener {
-            startActivity(Intent(this, DeliveryActivity::class.java))
-        }
-        parcel2.setOnClickListener {
-            startActivity(Intent(this, DeliveryActivity::class.java))
-        }
+
+
+        val recentParcelList = findViewById<RecyclerView>(R.id.recentParcelList)
+        val parcels: ParcelsViewModel by viewModels()
+        val parcelSheet = BottomSheetBehavior.from(parcelBottomSheet)
+        parcelSheet.peekHeight = resources.getDimensionPixelSize(R.dimen.minimizeHeight)
+        locationBtn.layoutParams = setLayoutParams(R.dimen.tenZeroFour)
+
+        val dummyData =  mutableListOf<ParcelModel>()
+        dummyData.add(ParcelModel(receiverName = "Kafui Richard", origin = "Santasi" , destination = "Patasi"))
+        dummyData.add(ParcelModel(receiverName = "Eric Osei", origin = "Adum" , destination = "Tech Junction"))
+
+        parcels.setParcel(dummyData)
+
+        parcels.getParcels().observe(this, Observer { parcelx ->
+
+            if (parcelx == null || parcelx.size > 0) {
+                parcelSheet.peekHeight = resources.getDimensionPixelSize(R.dimen.fullHeight)
+                locationBtn.layoutParams = setLayoutParams(R.dimen.threeZeroFour)
+                recentParcelList.adapter = RecentParcelAdapter(parcelx, this)
+            }
+        })
+
+
 
         locationBtn.setOnClickListener {
             getLocation(locationComponent)
@@ -68,11 +94,20 @@ class MainActivity : AppCompatActivity(), PermissionsListener {
 
         sendParcel.setOnClickListener {
             if (location != null) {
-                val newParcel = NewParcelFragment(location!!.latitude,location!!.longitude)
+                val newParcel = NewParcelFragment(location!!.latitude, location!!.longitude)
                 newParcel.setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme)
                 newParcel.show(supportFragmentManager, "")
             }
         }
+    }
+
+    private fun setLayoutParams(marginBottom: Int): RelativeLayout.LayoutParams{
+        val layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT)
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END)
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
+        layoutParams.setMargins(0,0,resources.getDimensionPixelSize(R.dimen.sixteen),resources.getDimensionPixelSize(marginBottom))
+        return layoutParams
+
     }
 
     private fun enableLocationComponent(style: Style) {

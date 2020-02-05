@@ -38,7 +38,8 @@ class RecentParcelAdapter(
 
     override fun onBindViewHolder(holder: ParcelViewHolder, position: Int) {
         val parcel = parcels[position]
-        holder.receiverName.text = parcel.receiverName
+        val receiverName = "To : ${parcel.receiverName}"
+        holder.receiverName.text = receiverName
         holder.origin.text = parcel.origin
         holder.destination.text = parcel.destination
 

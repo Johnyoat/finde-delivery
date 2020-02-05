@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="minimizeHeight">88dp</dimen>
+    <dimen name="fullHeight">324dp</dimen>
+    <dimen name="tenZeroFour">104dp</dimen>
+    <dimen name="sixteen">16dp</dimen>
+    <dimen name="threeZeroFour">340dp</dimen>
+</resources>
