@@ -101,7 +101,9 @@
                     android:gravity="center_vertical"
                     android:padding="8dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:text="Tap to Select Location"
+                    android:textAllCaps="false"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/destinationLocation"
@@ -114,7 +116,10 @@
                     android:backgroundTint="@color/litGray"
                     android:padding="8dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:text="Tap to Select Destination"
+                    android:textAllCaps="false"
+                    android:gravity="center_vertical"/>
 
 
             </RelativeLayout>

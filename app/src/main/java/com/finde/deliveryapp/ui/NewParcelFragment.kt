@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -15,7 +16,7 @@ import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.plugins.places.picker.PlacePicker
 import com.mapbox.mapboxsdk.plugins.places.picker.model.PlacePickerOptions
-import java.util.*
+import kotlinx.android.synthetic.main.fragment_new_parcel.*
 
 /**
  * A simple [Fragment] subclass.
@@ -36,8 +37,23 @@ class NewParcelFragment(private val lat: Double, private val lng:Double) : Dialo
         super.onViewCreated(view, savedInstanceState)
 
         val back: AppCompatImageButton = view.findViewById(R.id.back)
+        val startlocation:AppCompatButton = view.findViewById(R.id.startLocation)
+        val destinattionLocation:AppCompatButton = view.findViewById(R.id.destinationLocation)
+
+
+
         back.setOnClickListener {
             dismissAllowingStateLoss()
+        }
+
+        startLocation.setOnClickListener {
+            rCode = 1
+            goToPickerActivity()
+        }
+
+        destinattionLocation.setOnClickListener {
+            rCode = 2
+            goToPickerActivity()
         }
     }
 
@@ -62,7 +78,12 @@ class NewParcelFragment(private val lat: Double, private val lng:Double) : Dialo
         if (requestCode == rCode && resultCode == Activity.RESULT_OK) {
             if (data == null) return
             val carmenFeature = PlacePicker.getPlace(data) ?: return
-            val cordinates = carmenFeature.center()?.coordinates() as ArrayList<Double?>
+            val coordinates = carmenFeature.center()?.coordinates()
+            print(carmenFeature.placeName())
+            when(rCode){
+                1->startLocation.text = carmenFeature.placeName()
+                2->destinationLocation.text = carmenFeature.placeName()
+            }
         }
     }
 
