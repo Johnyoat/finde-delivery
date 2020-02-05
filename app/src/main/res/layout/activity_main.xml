@@ -6,53 +6,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/white"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_menu"
-        android:tint="@color/black"
-        app:borderWidth="0dp" />
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:backgroundTint="@color/white"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_my_location"
-        android:tint="@color/black"
-        app:borderWidth="0dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="340dp"
-        android:layout_marginEnd="16dp"/>
-
-    <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/mapView"
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="6.692015"
-        mapbox:mapbox_cameraTargetLng="-1.622962"
-        mapbox:mapbox_cameraTilt="50.25"
-        mapbox:mapbox_cameraZoomMin="6"
-        mapbox:mapbox_cameraZoom="14"
-        mapbox:mapbox_uiRotateGestures="false" />
+        android:layout_height="match_parent">
 
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_menu"
+            android:tint="@color/black"
+            app:borderWidth="0dp" />
 
-</RelativeLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/locationBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="340dp"
+            android:backgroundTint="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_my_location"
+            android:tint="@color/black"
+            app:borderWidth="0dp"
+            />
+
+
+        <com.mapbox.mapboxsdk.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_anchorGravity="center"
+            mapbox:mapbox_cameraTargetLat="6.692015"
+            mapbox:mapbox_cameraTargetLng="-1.622962"
+            mapbox:mapbox_cameraTilt="50.25"
+            mapbox:mapbox_cameraZoom="14"
+            mapbox:mapbox_cameraZoomMin="6"
+            mapbox:mapbox_uiRotateGestures="false" />
+    </RelativeLayout>
 
     <include layout="@layout/parcels_ui" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
