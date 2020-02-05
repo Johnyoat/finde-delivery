@@ -23,14 +23,14 @@
         android:textSize="18sp"
         android:layout_toEndOf="@id/dots"
         android:layout_marginTop="16dp"
-        android:id="@+id/deliveryPerson"
+        android:id="@+id/receiverName"
         android:layout_marginBottom="8dp"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="12dp"
         android:layout_height="12dp"
         android:src="@drawable/circle_outline"
-        android:layout_below="@id/deliveryPerson"
+        android:layout_below="@id/receiverName"
         android:layout_toEndOf="@id/dots"
         android:id="@+id/startIcon"
         android:tint="@color/red"/>
@@ -61,10 +61,10 @@
         android:layout_height="wrap_content"
         android:text="@string/patasi"
         android:layout_toEndOf="@+id/startIcon"
-        android:layout_below="@+id/deliveryPerson"
+        android:layout_below="@+id/receiverName"
         android:layout_marginTop="-2dp"
         android:layout_marginStart="8dp"
-        android:id="@+id/startLocation"/>
+        android:id="@+id/origin"/>
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -74,7 +74,7 @@
         android:layout_toEndOf="@+id/destinationIcon"
         android:layout_below="@id/divider"
         android:layout_marginStart="8dp"
-        android:id="@+id/destinationLocation"
+        android:id="@+id/destination"
         android:layout_marginTop="-2dp"/>
 
 
