@@ -1,11 +1,13 @@
 package com.finde.deliveryapp.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
+import com.finde.deliveryapp.DeliveryActivity
 import com.finde.deliveryapp.R
 import com.finde.deliveryapp.models.ParcelModel
 
@@ -44,7 +46,9 @@ class RecentParcelAdapter(
         holder.destination.text = parcel.destination
 
         holder.itemView.setOnClickListener {
-
+            val i = Intent(activity,DeliveryActivity::class.java)
+            i.putExtra("parcel",parcel)
+            activity.startActivity(i)
         }
     }
 }

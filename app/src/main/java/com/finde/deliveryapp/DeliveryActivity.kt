@@ -3,6 +3,7 @@ package com.finde.deliveryapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import com.finde.deliveryapp.models.ParcelModel
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.Style
 import kotlinx.android.synthetic.main.activity_delivery.*
@@ -16,7 +17,6 @@ class DeliveryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_delivery)
         mapView = findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
-
         mapView.getMapAsync { mapboxMap ->
             mapboxMap.uiSettings.isAttributionEnabled = false
 
@@ -25,6 +25,12 @@ class DeliveryActivity : AppCompatActivity() {
                 Style.MAPBOX_STREETS
             ) { }
         }
+
+        val parcel = intent.extras?.getParcelable<ParcelModel>("parcel")
+
+        origin.text = parcel?.origin
+        destination.text = parcel?.destination
+
 
         cancelBtn.setOnClickListener {
             finish()

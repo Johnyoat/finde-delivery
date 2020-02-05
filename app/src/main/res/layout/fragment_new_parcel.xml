@@ -163,14 +163,13 @@
                         android:text="Parcel Weight"
                         android:textSize="12sp" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.jaredrummler.materialspinner.MaterialSpinner
                         android:id="@+id/parcelWeight"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="8dp"
                         android:background="@drawable/gray_border_line"
                         android:backgroundTint="@color/litGray"
-                        android:drawableEnd="@drawable/ic_arrow_drop_down"
                         android:padding="4dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -184,13 +183,12 @@
                         android:text="Item Type"
                         android:textSize="12sp" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.jaredrummler.materialspinner.MaterialSpinner
                         android:id="@+id/itemType"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/gray_border_line"
                         android:backgroundTint="@color/litGray"
-                        android:drawableEnd="@drawable/ic_arrow_drop_down"
                         android:padding="8dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />

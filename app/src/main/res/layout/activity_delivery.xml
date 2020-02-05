@@ -52,7 +52,7 @@
 
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/startLocation"
+            android:id="@+id/origin"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/gray_border_line"
@@ -66,11 +66,11 @@
 
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/destinationLocation"
+            android:id="@+id/destination"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_below="@id/startLocation"
-            android:layout_alignStart="@id/startLocation"
+            android:layout_below="@id/origin"
+            android:layout_alignStart="@id/origin"
             android:layout_marginTop="16dp"
             android:background="@drawable/gray_border_line"
             android:backgroundTint="@color/litGray"
@@ -84,8 +84,8 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/destinationLocation"
-            android:layout_alignStart="@id/destinationLocation"
+            android:layout_below="@+id/destination"
+            android:layout_alignStart="@id/destination"
             android:layout_marginTop="16dp"
             android:text="Cancel"
             android:textColor="@color/red"
@@ -98,8 +98,8 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/destinationLocation"
-            android:layout_alignEnd="@id/destinationLocation"
+            android:layout_below="@+id/destination"
+            android:layout_alignEnd="@id/destination"
             android:layout_marginTop="16dp"
             android:text="Details"
             android:textColor="@color/blue"

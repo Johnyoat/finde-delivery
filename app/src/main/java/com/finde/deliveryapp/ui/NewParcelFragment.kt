@@ -40,6 +40,9 @@ class NewParcelFragment(private val lat: Double, private val lng:Double) : Dialo
         val startlocation:AppCompatButton = view.findViewById(R.id.startLocation)
         val destinattionLocation:AppCompatButton = view.findViewById(R.id.destinationLocation)
 
+        parcelWeight.setItems("Light","Medium","Heavy")
+        itemType.setItems("Food/Drink","Breakables","Electronics","Books")
+
 
 
         back.setOnClickListener {

@@ -31,7 +31,6 @@ import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.parcel_item.*
 import kotlinx.android.synthetic.main.parcels_ui.*
 import java.lang.ref.WeakReference
 
