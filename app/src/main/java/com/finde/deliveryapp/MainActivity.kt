@@ -2,6 +2,7 @@ package com.finde.deliveryapp
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.location.Location
 import android.os.Bundle
 import android.os.Looper
 import android.widget.Toast
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity(), PermissionsListener {
     private val defaultMaxWaitTime = defaultIntervalSeconds * 5
     private val callback = LocationCallBack(this)
     private var locationComponent: LocationComponent? = null
+    private var location: Location? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Mapbox.getInstance(this, getString(R.string.map_box_token))
@@ -60,14 +62,16 @@ class MainActivity : AppCompatActivity(), PermissionsListener {
             startActivity(Intent(this, DeliveryActivity::class.java))
         }
 
-        locationBtn.setOnClickListener{
+        locationBtn.setOnClickListener {
             getLocation(locationComponent)
         }
 
         sendParcel.setOnClickListener {
-            val newParcel = NewParcelFragment()
-            newParcel.setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme)
-            newParcel.show(supportFragmentManager, "")
+            if (location != null) {
+                val newParcel = NewParcelFragment(location!!.latitude,location!!.longitude)
+                newParcel.setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme)
+                newParcel.show(supportFragmentManager, "")
+            }
         }
     }
 
@@ -192,7 +196,8 @@ class MainActivity : AppCompatActivity(), PermissionsListener {
                 if (activity.maps != null && result.lastLocation != null) {
                     activity.maps!!.locationComponent
                         .forceLocationUpdate(result.lastLocation)
-                    activity.moveCamera(LatLng(location.latitude,location.longitude))
+                    activity.moveCamera(LatLng(location.latitude, location.longitude))
+                    activity.location = location
                 }
             }
         }

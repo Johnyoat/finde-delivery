@@ -50,9 +50,6 @@
             app:layout_anchorGravity="center"
             mapbox:mapbox_cameraTargetLat="6.692015"
             mapbox:mapbox_cameraTargetLng="-1.622962"
-            mapbox:mapbox_cameraTilt="50.25"
-            mapbox:mapbox_cameraZoom="14"
-            mapbox:mapbox_cameraZoomMin="6"
             mapbox:mapbox_uiRotateGestures="false" />
     </RelativeLayout>
 
