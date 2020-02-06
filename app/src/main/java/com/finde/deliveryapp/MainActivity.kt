@@ -145,6 +145,8 @@ class MainActivity : AppCompatActivity(), PermissionsListener {
             val newParcel = NewParcelFragment(location!!.latitude, location!!.longitude)
             newParcel.setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme)
             newParcel.show(supportFragmentManager, "")
+        }else{
+            Toast.makeText(this,"Turn on Location",Toast.LENGTH_SHORT).show()
         }
     }
 

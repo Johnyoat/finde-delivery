@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.finde.deliveryapp.R
 import com.finde.deliveryapp.models.ParcelModel
 import com.finde.deliveryapp.viewModels.ParcelsViewModel
@@ -99,7 +98,7 @@ class NewParcelFragment(private val lat: Double, private val lng: Double) : Dial
         if (requestCode == rCode && resultCode == Activity.RESULT_OK) {
             if (data == null) return
             val carmenFeature = PlacePicker.getPlace(data) ?: return
-            val coordinates = carmenFeature.center()?.coordinates()
+//            val coordinates = carmenFeature.center()?.coordinates()
             print(carmenFeature.placeName())
             when (rCode) {
                 1 -> origin.text = carmenFeature.placeName()
