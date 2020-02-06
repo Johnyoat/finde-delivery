@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
+import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -87,17 +88,63 @@ class MainActivity : AppCompatActivity(), PermissionsListener {
         })
 
 
+        minimize.setOnClickListener {
+            parcelSheet.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+
+
+        sendParcelFab.setOnClickListener{
+            callNewParcel()
+        }
+
+        parcelSheet.setBottomSheetCallback(object:BottomSheetBehavior.BottomSheetCallback(){
+            override fun onSlide(view: View, offset: Float) {
+                val alpha = 1 - offset
+                sendParcel.alpha = alpha
+                parcelTitle.alpha = offset
+                minimize.alpha = offset
+
+            }
+
+            @SuppressLint("SwitchIntDef")
+            override fun onStateChanged(view: View, state: Int) {
+                when(state){
+                    BottomSheetBehavior.STATE_EXPANDED->{
+                        sendParcel.visibility = View.GONE
+                        parcelTitle.visibility = View.VISIBLE
+                        minimize.visibility = View.VISIBLE
+                    }
+
+                    BottomSheetBehavior.STATE_DRAGGING->{
+                        parcelTitle.visibility = View.VISIBLE
+                        minimize.visibility = View.VISIBLE
+                        sendParcel.visibility = View.VISIBLE
+                    }
+
+                    BottomSheetBehavior.STATE_COLLAPSED->{
+                        sendParcel.visibility = View.VISIBLE
+                        parcelTitle.visibility = View.GONE
+                        minimize.visibility = View.GONE
+                    }
+                }
+            }
+        })
+
 
         locationBtn.setOnClickListener {
             getLocation(locationComponent)
         }
 
         sendParcel.setOnClickListener {
-            if (location != null) {
-                val newParcel = NewParcelFragment(location!!.latitude, location!!.longitude)
-                newParcel.setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme)
-                newParcel.show(supportFragmentManager, "")
-            }
+            callNewParcel()
+        }
+    }
+
+    private fun callNewParcel() {
+        if (location != null) {
+            val newParcel = NewParcelFragment(location!!.latitude, location!!.longitude)
+            newParcel.setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme)
+            newParcel.show(supportFragmentManager, "")
         }
     }
 

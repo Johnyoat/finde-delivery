@@ -1,42 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parcelBottomSheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignParentBottom="true"
     android:background="@color/white"
-    android:elevation="8dp"
-    android:orientation="vertical"
-    app:elevation="8dp"
     android:clickable="true"
+    android:elevation="8dp"
     android:focusable="true"
-    app:layout_behavior="@string/bottom_sheet_behavior"
-    app:behavior_peekHeight="324dp">
+    android:orientation="vertical"
+    app:behavior_peekHeight="324dp"
+    app:elevation="8dp"
+    app:layout_behavior="@string/bottom_sheet_behavior">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/sendParcel"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
+        app:borderWidth="0dp"
+        android:src="@drawable/ic_motorcycle"
         android:backgroundTint="@color/blue"
-        android:drawableEnd="@drawable/ic_double_right"
-        android:text="@string/send_a_parcel"
-        android:textAllCaps="false"
-        android:gravity="start|center_vertical"
-        android:drawablePadding="16dp"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:id="@+id/sendParcelFab"/>
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Recent Deliveries"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:id="@+id/parcelTitle"
+            android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_down"
+            android:tint="@color/blue"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/minimize"
+            android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sendParcel"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:backgroundTint="@color/blue"
+            android:drawableEnd="@drawable/ic_double_right"
+            android:drawablePadding="16dp"
+            android:gravity="start|center_vertical"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:text="@string/send_a_parcel"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
 
 
     <LinearLayout
+        android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:layout_below="@+id/header"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <View
             android:layout_width="0dp"
@@ -47,9 +88,9 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/recent"
             android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp" />
+            android:layout_marginEnd="32dp"
+            android:text="@string/recent" />
 
         <View
             android:layout_width="0dp"
@@ -63,8 +104,9 @@
         android:id="@+id/recentParcelList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/parcel_item"
+        android:layout_below="@id/divider"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="7"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        tools:listitem="@layout/parcel_item" />
 
-</LinearLayout>
+</RelativeLayout>
