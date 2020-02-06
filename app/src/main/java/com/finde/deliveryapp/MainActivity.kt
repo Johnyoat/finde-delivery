@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity(), PermissionsListener {
             if (parcelx == null || parcelx.size > 0) {
                 parcelSheet.peekHeight = resources.getDimensionPixelSize(R.dimen.fullHeight)
                 locationBtn.layoutParams = setLayoutParams(R.dimen.threeZeroFour)
+                parcelx.reverse()
                 recentParcelList.adapter = RecentParcelAdapter(parcelx, this)
             }
         })
