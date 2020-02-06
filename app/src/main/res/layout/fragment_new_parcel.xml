@@ -92,7 +92,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/startLocation"
+                    android:id="@+id/origin"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_toEndOf="@id/loc"
@@ -106,11 +106,11 @@
                     android:textAllCaps="false"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/destinationLocation"
+                    android:id="@+id/destination"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_below="@id/startLocation"
-                    android:layout_alignStart="@id/startLocation"
+                    android:layout_below="@id/origin"
+                    android:layout_alignStart="@id/origin"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/gray_border_line"
                     android:backgroundTint="@color/litGray"
@@ -211,17 +211,17 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Parcel Weight"
+                android:text="Phone Number"
                 android:textSize="12sp" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/phoneNumber"
+                android:id="@+id/receiverContact"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/gray_border_line"
                 android:backgroundTint="@color/litGray"
-                android:inputType="textPhonetic"
+                android:inputType="phone"
                 android:padding="4dp"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -235,7 +235,7 @@
                 android:textSize="12sp" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/name"
+                android:id="@+id/receiverName"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="8dp"

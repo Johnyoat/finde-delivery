@@ -4,19 +4,19 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class ParcelModel(
-    val id:String = "",
-    val senderName: String = "",
-    val senderContact:String="",
-    val receiverName: String = "",
-    val receiverContact: String = "",
-    val destinationLat: Double = 0.00,
-    val destinationLng: Double = 0.00,
-    val startLocationLat: Double = 0.00,
-    val startLocationLng: Double = 0.00,
-    val parcelType:String = "",
-    val parcelWeight:String ="",
-    val destination:String = "",
-    val origin:String = ""
+    var id:String = "",
+    var senderName: String = "",
+    var senderContact:String="",
+    var receiverName: String = "",
+    var receiverContact: String = "",
+    var destinationLat: Double = 0.00,
+    var destinationLng: Double = 0.00,
+    var startLocationLat: Double = 0.00,
+    var startLocationLng: Double = 0.00,
+    var parcelType:String = "",
+    var parcelWeight:String ="",
+    var destination:String = "",
+    var origin:String = ""
 ): Parcelable{
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
