@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="minimizeHeight">88dp</dimen>
-    <dimen name="fullHeight">324dp</dimen>
-    <dimen name="tenZeroFour">104dp</dimen>
-    <dimen name="sixteen">16dp</dimen>
-    <dimen name="threeZeroFour">340dp</dimen>
+
+    <dimen name="recentParcelPeekHeight">216dp</dimen>
+    <dimen name="fabMarginBottom">232dp</dimen>
+
+    <dimen name="recentParcelPeekHeightMinimized">88dp</dimen>
+    <dimen name="fabMarginBottomMinimized">104dp</dimen>
 </resources>

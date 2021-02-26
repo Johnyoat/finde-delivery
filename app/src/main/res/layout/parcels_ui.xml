@@ -11,7 +11,7 @@
     android:elevation="8dp"
     android:focusable="true"
     android:orientation="vertical"
-    app:behavior_peekHeight="324dp"
+    app:behavior_peekHeight="216dp"
     app:elevation="8dp"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
@@ -25,7 +25,8 @@
         app:borderWidth="0dp"
         android:src="@drawable/ic_motorcycle"
         android:backgroundTint="@color/blue"
-        android:id="@+id/sendParcelFab"/>
+        android:id="@+id/sendParcelFab"
+        android:tint="@color/white"/>
 
     <RelativeLayout
         android:id="@+id/header"

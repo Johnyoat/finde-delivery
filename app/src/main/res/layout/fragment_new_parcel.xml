@@ -100,10 +100,10 @@
                     android:backgroundTint="@color/litGray"
                     android:gravity="center_vertical"
                     android:padding="8dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     android:text="Tap to Select Location"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/destination"
@@ -114,12 +114,12 @@
                     android:layout_marginTop="16dp"
                     android:background="@drawable/gray_border_line"
                     android:backgroundTint="@color/litGray"
+                    android:gravity="center_vertical"
                     android:padding="8dp"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     android:text="Tap to Select Destination"
                     android:textAllCaps="false"
-                    android:gravity="center_vertical"/>
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
 
             </RelativeLayout>
@@ -223,6 +223,7 @@
                 android:backgroundTint="@color/litGray"
                 android:inputType="phone"
                 android:padding="4dp"
+                android:paddingStart="8dp"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -243,6 +244,7 @@
                 android:backgroundTint="@color/litGray"
                 android:inputType="textPersonName"
                 android:padding="4dp"
+                android:paddingStart="8dp"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
