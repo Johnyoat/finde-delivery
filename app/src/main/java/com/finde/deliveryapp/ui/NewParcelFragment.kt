@@ -69,7 +69,7 @@ class NewParcelFragment(private val lat: Double, private val lng: Double) : Dial
             tmp?.add(parcel)
 
             parcels.setParcel(tmp!!)
-            Toast.makeText(context!!,"Parcel Request Added",Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),"Parcel Request Added",Toast.LENGTH_SHORT).show()
             dismissAllowingStateLoss()
 
         }
@@ -77,6 +77,7 @@ class NewParcelFragment(private val lat: Double, private val lng: Double) : Dial
     }
 
     private fun goToPickerActivity() {
+
         startActivityForResult(
             PlacePicker.IntentBuilder()
                 .accessToken(getString(R.string.map_box_token))
