@@ -8,30 +8,8 @@
     android:orientation="vertical"
     tools:context=".ui.NewParcelFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:elevation="8dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/back"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:padding="16dp"
-            android:src="@drawable/ic_arrow_back" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="New Parcel Delivery"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-    </LinearLayout>
+  <include layout="@layout/toolbar"
+      android:id="@+id/toolbar"/>
 
     <View
         android:layout_width="match_parent"
@@ -140,14 +118,22 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:background="@drawable/curve_edges">
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/ImageIcon"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/dm_bg" />
+                            android:id="@+id/packageImage"/>
+
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:id="@+id/capturePackage"
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:src="@drawable/ef_ic_camera_white"
+                            android:layout_centerInParent="true"
+                            android:tint="@color/blue"/>
                     </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>

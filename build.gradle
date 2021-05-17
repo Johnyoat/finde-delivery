@@ -5,13 +5,13 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath 'com.android.tools.build:gradle:4.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.google.gms:google-services:4.3.5'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.2'
     }
 }
 
@@ -20,6 +20,7 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
+        maven { url "https://jitpack.io" }
         maven {
             url 'https://api.mapbox.com/downloads/v2/releases/maven'
             authentication {
@@ -27,10 +28,9 @@ allprojects {
             }
             credentials {
                 username = "mapbox"
-                password = "pk.eyJ1Ijoiam9obnlvYXQiLCJhIjoiY2s2MWRzd3hhMDJrODNrcGp3YWgxbnFpbCJ9.sB72h3WL9M5Umlzd00amJA"
+                password = "sk.eyJ1Ijoiam9obnlvYXQiLCJhIjoiY2tnMHpyZjA4MGNpMzJwcXc1OGpib250ayJ9.__ARIUYVvm_-qOTvWrzsEQ"
             }
         }
-        
     }
 }
 

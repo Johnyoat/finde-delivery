@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -50,7 +51,7 @@
             app:layout_anchorGravity="center"
             mapbox:mapbox_cameraTargetLat="6.692015"
             mapbox:mapbox_cameraTargetLng="-1.622962"
-            mapbox:mapbox_uiRotateGestures="false" />
+            mapbox:mapbox_uiRotateGestures="false"/>
     </RelativeLayout>
 
     <include layout="@layout/parcels_ui" />

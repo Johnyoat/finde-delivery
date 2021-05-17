@@ -94,7 +94,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/dm_bg"
                 android:scaleType="centerCrop"
-                android:id="@+id/ImageIcon" />
+                android:id="@+id/packageImage" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.track.TrackingFragment"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_close"
+        android:id="@+id/closeBtn"/>
+
+
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:gravity="center"
+       android:layout_centerInParent="true"
+       android:id="@+id/trackingUi">
+       <androidx.appcompat.widget.AppCompatImageView
+           android:layout_width="200dp"
+           android:layout_height="200dp"
+           android:layout_margin="16dp"
+           android:src="@drawable/ic_track_map"
+           android:layout_marginTop="-24dp"/>
+
+       <androidx.appcompat.widget.AppCompatTextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:alpha="0.8"
+           android:text="Enter Tracking Id"
+           android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+           android:textStyle="bold" />
+
+       <androidx.appcompat.widget.AppCompatTextView
+           style="@style/TextAppearance.MaterialComponents.Body2"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:alpha="0.8"
+           android:text="Use tracking number to find status of delivery"/>
+
+
+       <androidx.appcompat.widget.AppCompatEditText
+           android:layout_width="match_parent"
+           android:layout_height="48dp"
+           android:background="@drawable/curve_edges"
+           android:paddingStart="8dp"
+           android:paddingEnd="8dp"
+           android:layout_marginTop="16dp"
+           android:layout_marginBottom="16dp"/>
+
+
+
+
+
+       <androidx.appcompat.widget.AppCompatButton
+           android:id="@+id/transactionBtn"
+           android:layout_width="wrap_content"
+           android:layout_height="48dp"
+           android:background="@drawable/curve_edges"
+           android:backgroundTint="@color/colorPrimary"
+           android:paddingStart="12dp"
+           android:paddingEnd="12dp"
+           android:text="Search"
+           android:textAllCaps="false"
+           android:textColor="@android:color/white" />
+   </LinearLayout>
+
+
+    <include layout="@layout/parcel_item"
+        android:id="@+id/parcelDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/trackingUi"
+        android:visibility="gone"/>
+
+</RelativeLayout>

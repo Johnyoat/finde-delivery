@@ -5,14 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.finde.deliveryapp.DeliveryActivity
 import com.finde.deliveryapp.R
 import com.finde.deliveryapp.models.ParcelModel
 
 class RecentParcelAdapter(
-    private val parcels: MutableList<ParcelModel>,
+    private val parcels: List<ParcelModel>,
     private val activity: AppCompatActivity
 ) :
     RecyclerView.Adapter<RecentParcelAdapter.ParcelViewHolder>() {
@@ -22,6 +24,7 @@ class RecentParcelAdapter(
         val receiverName: AppCompatTextView = itemView.findViewById(R.id.receiverName)
         val origin: AppCompatTextView = itemView.findViewById(R.id.origin)
         val destination: AppCompatTextView = itemView.findViewById(R.id.destination)
+        val packageImage: AppCompatImageView = itemView.findViewById(R.id.packageImage)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParcelViewHolder {
@@ -44,6 +47,7 @@ class RecentParcelAdapter(
         holder.receiverName.text = receiverName
         holder.origin.text = parcel.origin
         holder.destination.text = parcel.destination
+        Glide.with(activity).load(parcel.packageImage).into(holder.packageImage)
 
         holder.itemView.setOnClickListener {
             val i = Intent(activity,DeliveryActivity::class.java)
