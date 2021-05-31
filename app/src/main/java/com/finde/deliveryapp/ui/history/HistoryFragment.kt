@@ -11,7 +11,9 @@ import androidx.fragment.app.viewModels
 import com.finde.deliveryapp.R
 import com.finde.deliveryapp.adapters.RecentParcelAdapter
 import com.finde.deliveryapp.databinding.HistoryFragmentBinding
+import com.finde.deliveryapp.ext.popStack
 import com.finde.deliveryapp.viewModels.ParcelsViewModel
+import com.google.android.material.transition.MaterialFadeThrough
 
 class HistoryFragment : DialogFragment() {
 
@@ -21,6 +23,12 @@ class HistoryFragment : DialogFragment() {
 
     private val viewModel: ParcelsViewModel by viewModels()
     private lateinit var binding:HistoryFragmentBinding
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +42,7 @@ class HistoryFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.toolbar.backBtn.setOnClickListener {
-            dismissAllowingStateLoss()
+            popStack()
         }
 
         viewModel.getHistory().observe(viewLifecycleOwner,{ parcelLists ->

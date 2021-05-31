@@ -1,4 +1,4 @@
-package com.finde.deliveryapp.ui
+package com.finde.deliveryapp.ui.newParcel
 
 
 import android.app.Activity
@@ -13,12 +13,15 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.esafirm.imagepicker.features.ImagePicker
 import com.finde.deliveryapp.R
 import com.finde.deliveryapp.databinding.FragmentNewParcelBinding
+import com.finde.deliveryapp.ext.popStack
 import com.finde.deliveryapp.models.ParcelModel
 import com.finde.deliveryapp.viewModels.ParcelsViewModel
+import com.google.android.material.transition.MaterialFadeThrough
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.mapbox.mapboxsdk.camera.CameraPosition
@@ -33,9 +36,11 @@ import timber.log.Timber
 /**
  * A simple [Fragment] subclass.
  */
-class NewParcelFragment(private val lat: Double, private val lng: Double) : DialogFragment() {
+class NewParcelFragment() : DialogFragment() {
 
 
+    private var lat: Double = 0.0
+    private var lng: Double = 0.0
     private var rCode = 0
     private var cameraCode = 11
     private var parcel = ParcelModel()
@@ -43,6 +48,15 @@ class NewParcelFragment(private val lat: Double, private val lng: Double) : Dial
     private val storage = Firebase.storage
     private val storageRef = storage.reference
     private var fileUri: Uri? = null
+    private val viewModel: NewParcelViewModel by viewModels()
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,10 +72,12 @@ class NewParcelFragment(private val lat: Double, private val lng: Double) : Dial
         parcelWeight.setItems("Light", "Medium", "Heavy")
         itemType.setItems("Food/Drink", "Breakables", "Electronics", "Books")
 
+        lat = arguments?.getDouble("lat")!!
+        lng = arguments?.getDouble("lng")!!
 
 
         binding.toolbar.backBtn.setOnClickListener {
-            dismissAllowingStateLoss()
+           popStack()
         }
 
         binding.origin.setOnClickListener {
@@ -104,8 +120,9 @@ class NewParcelFragment(private val lat: Double, private val lng: Double) : Dial
                     parcels.add(parcel).await()
 
 
-                    withContext(Dispatchers.Main){
-                        Toast.makeText(requireContext(), "Parcel Request Added", Toast.LENGTH_SHORT).show()
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(requireContext(), "Parcel Request Added", Toast.LENGTH_SHORT)
+                            .show()
                         dismissAllowingStateLoss()
                     }
 
@@ -121,9 +138,6 @@ class NewParcelFragment(private val lat: Double, private val lng: Double) : Dial
             binding.toolbar.progressBar.isVisible = false
 
         }
-
-
-
 
 
     }

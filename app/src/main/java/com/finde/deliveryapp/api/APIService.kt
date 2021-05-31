@@ -10,7 +10,7 @@ import retrofit2.http.GET
 interface APIService {
 
     @GET("/findepages")
-    fun getBusinesses():Call<List<BusinessModel>>
+    suspend fun getBusinesses():List<BusinessModel>
 
 
     companion object {
