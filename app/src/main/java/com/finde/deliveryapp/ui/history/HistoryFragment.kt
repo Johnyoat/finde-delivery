@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.finde.deliveryapp.R
 import com.finde.deliveryapp.adapters.RecentParcelAdapter
@@ -15,7 +16,7 @@ import com.finde.deliveryapp.ext.popStack
 import com.finde.deliveryapp.viewModels.ParcelsViewModel
 import com.google.android.material.transition.MaterialFadeThrough
 
-class HistoryFragment : DialogFragment() {
+class HistoryFragment : Fragment() {
 
     companion object {
         fun newInstance() = HistoryFragment()
@@ -58,9 +59,6 @@ class HistoryFragment : DialogFragment() {
     }
 
 
-    override fun getTheme(): Int {
-        return R.style.AppTheme
-    }
 
 
 

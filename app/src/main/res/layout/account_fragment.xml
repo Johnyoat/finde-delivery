@@ -43,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/username"
             android:layout_alignStart="@id/username"
-            android:text="+233246970708" />
+            android:text="+233246970708"
+            android:id="@+id/userPhoneNumber"/>
 
         <androidx.appcompat.widget.AppCompatImageButton
             style="@style/Widget.AppCompat.Button.Borderless"

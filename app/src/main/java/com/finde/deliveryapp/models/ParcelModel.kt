@@ -19,5 +19,7 @@ data class ParcelModel(
     var destination: String = "",
     var origin: String = "",
     var packageImage: String = "",
-    var uid: String = ""
+    var uid: String = "",
+    var deliveryCompanyName:String = "",
+    var deliveryCompanyId:String = ""
 ) : Parcelable

@@ -183,6 +183,35 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:text="Delivery Company"
+                android:textColor="@color/blue"
+                android:textSize="16sp" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Delivery Company"
+                android:textSize="12sp" />
+
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/deliveryCompany"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/gray_border_line"
+                android:backgroundTint="@color/litGray"
+                android:inputType="phone"
+                android:padding="4dp"
+                android:paddingStart="8dp"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"

@@ -5,17 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.finde.deliveryapp.databinding.AccountFragmentBinding
+import com.finde.deliveryapp.ext.load
 import com.finde.deliveryapp.ext.popStack
 import com.finde.deliveryapp.ui.LoginSplashActivity
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.firebase.auth.FirebaseAuth
-import come.finde.finderider.ui.account.AccountViewModel
 
 
-class AccountFragment : DialogFragment() {
+class AccountFragment : Fragment() {
     private lateinit var binding: AccountFragmentBinding
 
 
@@ -38,6 +38,13 @@ class AccountFragment : DialogFragment() {
         }
 
         binding.toolbar.title.text = "Account"
+
+        viewModel.getUser().observe(viewLifecycleOwner,{user ->
+
+            binding.userProfile.load(requireContext(),user.profileUrl)
+            binding.username.text = "${user.firstName} ${user.lastName}"
+            binding.userPhoneNumber.text = user.phoneNumber
+        })
 
 
         binding.logOut.setOnClickListener{
