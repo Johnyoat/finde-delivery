@@ -20,13 +20,13 @@ class AccountFragment : Fragment() {
     private lateinit var binding: AccountFragmentBinding
 
 
-    private  val viewModel: AccountViewModel by viewModels()
+    private val viewModel: AccountViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = AccountFragmentBinding.inflate(layoutInflater,container,false)
+        binding = AccountFragmentBinding.inflate(layoutInflater, container, false)
 
         return binding.root
     }
@@ -40,22 +40,38 @@ class AccountFragment : Fragment() {
 
         binding.toolbar.title.text = "Account"
 
-        viewModel.getUser().observe(viewLifecycleOwner,{user ->
+        viewModel.getUser().observe(viewLifecycleOwner, { user ->
 
-            binding.userProfile.load(requireContext(),user.profileUrl)
+            binding.userProfile.load(requireContext(), user.profileUrl)
             binding.username.text = "${user.firstName} ${user.lastName}"
             binding.userPhoneNumber.text = user.phoneNumber
         })
 
 
         binding.editProfileBtn.setOnClickListener {
-            EditProfileFragment().show(childFragmentManager,"PF")
+            EditProfileFragment().show(childFragmentManager, "PF")
         }
 
-        binding.logOut.setOnClickListener{
+        binding.logOut.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-            requireActivity().startActivity( Intent(requireContext(),LoginSplashActivity::class.java))
+            requireActivity().startActivity(
+                Intent(
+                    requireContext(),
+                    LoginSplashActivity::class.java
+                )
+            )
             requireActivity().finish()
+        }
+
+        binding.logOut.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            requireActivity().finish()
+            requireActivity().startActivity(
+                Intent(
+                    requireContext(),
+                    LoginSplashActivity::class.java
+                )
+            )
         }
     }
 
