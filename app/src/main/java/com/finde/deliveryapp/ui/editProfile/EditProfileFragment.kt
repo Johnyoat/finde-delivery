@@ -15,6 +15,7 @@ import com.esafirm.imagepicker.features.ImagePickerMode
 import com.esafirm.imagepicker.features.registerImagePicker
 import com.finde.deliveryapp.R
 import com.finde.deliveryapp.databinding.FragmentEditProfileBinding
+import com.finde.deliveryapp.ext.areTextInputLayoutsValid
 import com.finde.deliveryapp.ext.load
 import com.finde.deliveryapp.models.UserModel
 import com.finde.deliveryapp.ui.account.AccountViewModel
@@ -47,10 +48,13 @@ class EditProfileFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.phoneNumber.editText?.setText(phoneNumber)
+
         accountViewModel.getUser().observe(viewLifecycleOwner, { user ->
+            if (user == null) return@observe
+
             binding.firstName.editText?.setText(user.firstName)
             binding.lastName.editText?.setText(user.lastName)
-            binding.phoneNumber.editText?.setText(phoneNumber)
             binding.userProfile.load(requireContext(), user.profileUrl)
             userModel = user
         })
@@ -78,6 +82,8 @@ class EditProfileFragment : DialogFragment() {
             userModel.firstName = binding.firstName.editText?.text.toString()
             userModel.lastName = binding.lastName.editText?.text.toString()
             userModel.phoneNumber = phoneNumber
+
+            if (!areTextInputLayoutsValid(binding.lastName,binding.firstName)) return@setOnClickListener
 
             binding.progressBar.isGone = false
             binding.saveBtn.isEnabled = false

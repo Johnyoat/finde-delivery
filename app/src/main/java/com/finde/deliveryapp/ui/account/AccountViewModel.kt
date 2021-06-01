@@ -21,12 +21,9 @@ class AccountViewModel : ViewModel() {
     fun getUser(): LiveData<UserModel> {
         val user = MutableLiveData<UserModel>()
 
-        viewModelScope.launch {
-            try {
-                user.value =
-                     db.document("users/${uid}").get().await().toObject(UserModel::class.java)
-            } catch (e: Exception) {
-                Timber.d(e.localizedMessage)
+        db.document("users/${uid}").addSnapshotListener { userSnapShot, err ->
+            if (err == null) {
+                user.value = userSnapShot?.toObject(UserModel::class.java)
             }
         }
 
@@ -34,8 +31,9 @@ class AccountViewModel : ViewModel() {
     }
 
 
-    fun updateUser(userModel: UserModel):Task<Void>{
-      return  db.document("users/${uid}").set(userModel)
+    fun updateUser(userModel: UserModel): Task<Void> {
+        userModel.uid = uid!!
+        return db.document("users/${uid}").set(userModel)
     }
 
 }

@@ -59,8 +59,9 @@ class HomeFragment : Fragment() {
         accountViewModel.getUser().observe(viewLifecycleOwner, { user ->
             if (user == null){
                 EditProfileFragment().show(childFragmentManager,"PF")
+            }else{
+                binding.userProfile.load(requireContext(), user.profileUrl)
             }
-            binding.userProfile.load(requireContext(), user.profileUrl)
         })
 
 

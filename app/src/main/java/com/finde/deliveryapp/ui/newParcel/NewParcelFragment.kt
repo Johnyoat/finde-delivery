@@ -19,7 +19,7 @@ import com.esafirm.imagepicker.features.ImagePickerMode
 import com.esafirm.imagepicker.features.registerImagePicker
 import com.finde.deliveryapp.R
 import com.finde.deliveryapp.databinding.FragmentNewParcelBinding
-import com.finde.deliveryapp.ext.areEditTextsValid
+import com.finde.deliveryapp.ext.areTextInputLayoutsValid
 import com.finde.deliveryapp.ext.popStack
 import com.finde.deliveryapp.models.BusinessModel
 import com.finde.deliveryapp.models.ParcelModel
@@ -171,7 +171,7 @@ class NewParcelFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if (!areEditTextsValid(
+            if (!areTextInputLayoutsValid(
                     binding.receiverContact,
                     binding.receiverName
                 )
