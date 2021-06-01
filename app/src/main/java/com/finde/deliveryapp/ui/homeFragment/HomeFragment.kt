@@ -57,11 +57,10 @@ class HomeFragment : Fragment() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         accountViewModel.getUser().observe(viewLifecycleOwner, { user ->
-            binding.userProfile.load(requireContext(), user.profileUrl)
-
             if (user == null){
                 EditProfileFragment().show(childFragmentManager,"PF")
             }
+            binding.userProfile.load(requireContext(), user.profileUrl)
         })
 
 

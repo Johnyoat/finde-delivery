@@ -29,6 +29,7 @@ import com.finde.deliveryapp.ui.confirmation.ConfirmationFragment
 import com.finde.deliveryapp.viewModels.ParcelsViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.mapbox.mapboxsdk.camera.CameraPosition
@@ -60,6 +61,7 @@ class NewParcelFragment : Fragment() {
     private var isDestinationSelected = false
     private var isOriginSelected = false
     private lateinit var user: UserModel
+    private val phoneNumber = FirebaseAuth.getInstance().currentUser?.phoneNumber.toString()
 
 
     companion object {
@@ -91,7 +93,6 @@ class NewParcelFragment : Fragment() {
 
         accountViewModel.getUser().observe(viewLifecycleOwner, {
             parcel.senderName = "${it.firstName} ${it.lastName}"
-            parcel.senderContact = it.phoneNumber
         })
 
         binding.parcelWeight.setOnItemSelectedListener { _, _, _, item ->
@@ -182,6 +183,7 @@ class NewParcelFragment : Fragment() {
             parcel.receiverName = binding.receiverName.text.toString()
             parcel.origin = binding.origin.text.toString()
             parcel.destination = binding.destination.text.toString()
+            parcel.senderContact = phoneNumber
 
             try {
                 GlobalScope.launch {

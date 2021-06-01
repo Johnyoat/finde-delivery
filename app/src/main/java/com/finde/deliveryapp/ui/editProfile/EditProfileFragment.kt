@@ -29,10 +29,11 @@ class EditProfileFragment : DialogFragment() {
 
     private lateinit var binding: FragmentEditProfileBinding
     private val accountViewModel: AccountViewModel by viewModels()
-    private lateinit var userModel: UserModel
+    private  var userModel: UserModel = UserModel()
     private val storage = Firebase.storage
     private val storageRef = storage.reference
     private var fileUri: Uri? = null
+    private val phoneNumber = FirebaseAuth.getInstance().currentUser?.phoneNumber.toString()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +50,7 @@ class EditProfileFragment : DialogFragment() {
         accountViewModel.getUser().observe(viewLifecycleOwner, { user ->
             binding.firstName.editText?.setText(user.firstName)
             binding.lastName.editText?.setText(user.lastName)
-            binding.phoneNumber.editText?.setText(user.phoneNumber)
+            binding.phoneNumber.editText?.setText(phoneNumber)
             binding.userProfile.load(requireContext(), user.profileUrl)
             userModel = user
         })
@@ -76,7 +77,7 @@ class EditProfileFragment : DialogFragment() {
         binding.saveBtn.setOnClickListener {
             userModel.firstName = binding.firstName.editText?.text.toString()
             userModel.lastName = binding.lastName.editText?.text.toString()
-            userModel.phoneNumber = FirebaseAuth.getInstance().currentUser?.phoneNumber.toString()
+            userModel.phoneNumber = phoneNumber
 
             binding.progressBar.isGone = false
             binding.saveBtn.isEnabled = false
