@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_toEndOf="@id/userProfile"
-            android:text="Salim Masud"
+            android:text="@string/loading"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/username"
             android:layout_alignStart="@id/username"
-            android:text="+233246970708"
+            android:text="@string/loading"
             android:id="@+id/userPhoneNumber"/>
 
         <androidx.appcompat.widget.AppCompatImageButton
@@ -80,7 +80,8 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_marginEnd="16dp"
-            android:background="@color/gray" />
+            android:background="@color/gray"
+            android:alpha="0.3"/>
 
         <androidx.appcompat.widget.AppCompatButton
             style="@style/Widget.AppCompat.Button.Borderless"
@@ -99,7 +100,8 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_marginEnd="16dp"
-            android:background="@color/gray" />
+            android:background="@color/gray"
+            android:alpha="0.3"/>
 
         <androidx.appcompat.widget.AppCompatButton
             style="@style/Widget.AppCompat.Button.Borderless"
@@ -118,7 +120,8 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_marginEnd="16dp"
-            android:background="@color/gray" />
+            android:background="@color/gray"
+            android:alpha="0.3"/>
 
         <androidx.appcompat.widget.AppCompatButton
             style="@style/Widget.AppCompat.Button.Borderless"

@@ -25,6 +25,7 @@ import com.finde.deliveryapp.models.BusinessModel
 import com.finde.deliveryapp.models.ParcelModel
 import com.finde.deliveryapp.models.UserModel
 import com.finde.deliveryapp.ui.account.AccountViewModel
+import com.finde.deliveryapp.ui.confirmation.ConfirmationFragment
 import com.finde.deliveryapp.viewModels.ParcelsViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
@@ -194,6 +195,7 @@ class NewParcelFragment : Fragment() {
                         Toast.makeText(requireContext(), "Parcel Request Added", Toast.LENGTH_SHORT)
                             .show()
                         popStack()
+                        ConfirmationFragment(true,parcel.id).show(childFragmentManager,"CF")
                     }
 
                 }
@@ -201,7 +203,7 @@ class NewParcelFragment : Fragment() {
 
             } catch (e: Exception) {
                 Timber.d(e.localizedMessage)
-                Toast.makeText(requireContext(), e.localizedMessage, Toast.LENGTH_SHORT).show()
+                ConfirmationFragment(false,parcel.id).show(childFragmentManager,"CF")
                 isProgressShown(false)
             }
 
