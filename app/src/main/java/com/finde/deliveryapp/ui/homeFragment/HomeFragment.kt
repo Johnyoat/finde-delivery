@@ -18,6 +18,7 @@ import com.finde.deliveryapp.ext.load
 import com.finde.deliveryapp.ext.navigateTo
 import com.finde.deliveryapp.ext.navigateToWithArgs
 import com.finde.deliveryapp.ui.account.AccountViewModel
+import com.finde.deliveryapp.ui.editProfile.EditProfileFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.transition.MaterialFadeThrough
@@ -57,6 +58,10 @@ class HomeFragment : Fragment() {
 
         accountViewModel.getUser().observe(viewLifecycleOwner, { user ->
             binding.userProfile.load(requireContext(), user.profileUrl)
+
+            if (user == null){
+                EditProfileFragment().show(childFragmentManager,"PF")
+            }
         })
 
 

@@ -29,7 +29,7 @@
             android:layout_below="@id/locationLabel"
             android:clickable="true"
             android:focusable="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="56dp"
