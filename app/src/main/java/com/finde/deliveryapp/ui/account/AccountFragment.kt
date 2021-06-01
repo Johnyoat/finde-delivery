@@ -11,6 +11,7 @@ import com.finde.deliveryapp.databinding.AccountFragmentBinding
 import com.finde.deliveryapp.ext.load
 import com.finde.deliveryapp.ext.popStack
 import com.finde.deliveryapp.ui.LoginSplashActivity
+import com.finde.deliveryapp.ui.editProfile.EditProfileFragment
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.firebase.auth.FirebaseAuth
 
@@ -46,6 +47,10 @@ class AccountFragment : Fragment() {
             binding.userPhoneNumber.text = user.phoneNumber
         })
 
+
+        binding.editProfileBtn.setOnClickListener {
+            EditProfileFragment().show(childFragmentManager,"PF")
+        }
 
         binding.logOut.setOnClickListener{
             FirebaseAuth.getInstance().signOut()

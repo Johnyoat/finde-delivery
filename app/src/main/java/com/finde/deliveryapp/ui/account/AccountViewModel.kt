@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.finde.deliveryapp.models.UserModel
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
@@ -30,6 +31,11 @@ class AccountViewModel : ViewModel() {
         }
 
         return user
+    }
+
+
+    fun updateUser(userModel: UserModel):Task<Void>{
+      return  db.document("users/${uid}").set(userModel)
     }
 
 }

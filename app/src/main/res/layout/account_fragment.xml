@@ -52,7 +52,8 @@
             android:layout_height="54dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_edit" />
+            android:src="@drawable/ic_edit"
+            android:id="@+id/editProfileBtn"/>
 
     </RelativeLayout>
 
