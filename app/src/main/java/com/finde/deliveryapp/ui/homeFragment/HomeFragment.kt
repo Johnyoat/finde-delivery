@@ -1,6 +1,7 @@
 package com.finde.deliveryapp.ui.homeFragment
 
 import android.annotation.SuppressLint
+import android.content.IntentSender
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
@@ -18,8 +19,11 @@ import com.finde.deliveryapp.ext.navigateTo
 import com.finde.deliveryapp.ext.navigateToWithArgs
 import com.finde.deliveryapp.ui.account.AccountViewModel
 import com.finde.deliveryapp.ui.editProfile.EditProfileFragment
+import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.material.transition.MaterialFadeThrough
 import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener
 import java.util.*
@@ -34,6 +38,9 @@ class HomeFragment : Fragment() {
     private val accountViewModel: AccountViewModel by viewModels()
     private lateinit var binding: HomeFragmentBinding
 
+    companion object {
+        const val LOCATION_SETTING_REQUEST = 999
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +89,7 @@ class HomeFragment : Fragment() {
             navigateTo(R.id.accountFragment)
         }
 
-        getUserLocation()
+        showEnableLocationSetting()
     }
 
 
@@ -116,6 +123,8 @@ class HomeFragment : Fragment() {
                 binding.location.text = "Location Disabled"
                 return@addOnSuccessListener
             }
+
+
             val address = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(
                 location.latitude,
                 location.longitude,
@@ -128,5 +137,34 @@ class HomeFragment : Fragment() {
 
     }
 
+
+    private fun showEnableLocationSetting() {
+        this.let {
+            val locationRequest = LocationRequest.create()
+            locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+            val builder = LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest)
+
+            val task = LocationServices.getSettingsClient(requireActivity())
+                .checkLocationSettings(builder.build())
+
+            task.addOnSuccessListener { response ->
+                val states = response.locationSettingsStates
+                if (states.isLocationPresent) {
+                    getUserLocation()
+                }
+            }
+            task.addOnFailureListener { e ->
+                if (e is ResolvableApiException) {
+                    try {
+                        // Handle result in onActivityResult()
+                        e.startResolutionForResult(requireActivity(),
+                            LOCATION_SETTING_REQUEST)
+                    } catch (sendEx: IntentSender.SendIntentException) { }
+                }
+            }
+        }
+    }
 
 }

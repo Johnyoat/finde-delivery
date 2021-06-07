@@ -1,11 +1,19 @@
 package com.finde.deliveryapp
 
 import android.Manifest
+import android.content.IntentSender
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.finde.deliveryapp.databinding.ActivityMainUiBinding
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
 import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.DialogOnAnyDeniedMultiplePermissionsListener
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.mapbox.mapboxsdk.Mapbox
@@ -29,22 +37,25 @@ class MainActivity : AppCompatActivity() {
         val navHostController = navHostFragment.navController
 
 
-        val dialogMultiplePermissionsListener: MultiplePermissionsListener =
-            DialogOnAnyDeniedMultiplePermissionsListener.Builder
-                .withContext(applicationContext)
-                .withTitle("Action Required")
-                .withMessage("The app needs both camera,location to work properly")
-                .withButtonText("Okay")
-                .build()
-
-
-        Dexter.withContext(applicationContext)
+        Dexter.withContext(this)
             .withPermissions(
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.CAMERA,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ).withListener(dialogMultiplePermissionsListener)
+            ).withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    request: MutableList<PermissionRequest>?,
+                    token: PermissionToken?
+                ) {
+
+                }
+            })
+            .onSameThread()
+            .check()
 
 
     }
