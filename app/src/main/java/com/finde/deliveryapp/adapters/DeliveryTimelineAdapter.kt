@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.finde.deliveryapp.databinding.ItemDeliveryTimelineBinding
+import com.finde.deliveryapp.ext.convertValueToDateFormat
 import com.finde.deliveryapp.models.DeliveryTimeLineModel
 import kotlinx.android.synthetic.main.item_delivery_timeline.view.*
 
@@ -15,7 +16,7 @@ class DeliveryTimelineAdapter(
 
     inner class DeliveryTimelineViewHolder(itemView: ItemDeliveryTimelineBinding) : RecyclerView.ViewHolder(itemView.root) {
         fun setUpData(deliveryTimeLineModel: DeliveryTimeLineModel): Unit {
-            itemView.timelineDate.text = deliveryTimeLineModel.createdAt.toString()
+            itemView.timelineDate.text = deliveryTimeLineModel.createdAt.convertValueToDateFormat("hh:mm a, dd-MMM-yyyy")
             itemView.timelineTitle.text = deliveryTimeLineModel.title
         }
     }

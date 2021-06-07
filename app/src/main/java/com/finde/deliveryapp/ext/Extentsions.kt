@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.finde.deliveryapp.R
 import com.google.android.material.textfield.TextInputLayout
 import de.hdodenhof.circleimageview.CircleImageView
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun Fragment.navigateTo(fragmentId: Int) {
     this.requireActivity().findNavController(R.id.container).navigate(fragmentId)
@@ -63,4 +65,12 @@ fun AppCompatImageView.load(context: Context, url: String) {
 fun CircleImageView.load(context: Context, url: String) {
     if (url.isEmpty()) return
     Glide.with(context).load(url).into(this)
+}
+
+fun Long.convertValueToDateFormat(dateFormat: String): String{
+    val formatter = SimpleDateFormat(dateFormat,Locale.getDefault())
+    val calendar: Calendar = Calendar.getInstance()
+    calendar.timeInMillis = this
+    return formatter.format(calendar.time)
+
 }
