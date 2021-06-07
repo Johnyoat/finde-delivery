@@ -22,6 +22,7 @@ import com.finde.deliveryapp.databinding.FragmentNewParcelBinding
 import com.finde.deliveryapp.ext.areTextInputLayoutsValid
 import com.finde.deliveryapp.ext.popStack
 import com.finde.deliveryapp.models.BusinessModel
+import com.finde.deliveryapp.models.DeliveryTimeLineModel
 import com.finde.deliveryapp.models.ParcelModel
 import com.finde.deliveryapp.models.UserModel
 import com.finde.deliveryapp.ui.account.AccountViewModel
@@ -184,6 +185,8 @@ class NewParcelFragment : Fragment() {
             parcel.origin = binding.origin.text.toString()
             parcel.destination = binding.destination.text.toString()
             parcel.senderContact = phoneNumber
+            parcel.createdAt = System.currentTimeMillis()
+            parcel.timeline.add(DeliveryTimeLineModel("Order Created Successfully",System.currentTimeMillis(),true))
 
             try {
                 GlobalScope.launch {

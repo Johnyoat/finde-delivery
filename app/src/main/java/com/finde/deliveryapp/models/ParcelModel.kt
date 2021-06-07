@@ -20,6 +20,9 @@ data class ParcelModel(
     var origin: String = "",
     var packageImage: String = "",
     var uid: String = "",
-    var deliveryCompanyName:String = "",
-    var deliveryCompanyId:String = ""
+    var deliveryCompanyName: String = "",
+    var deliveryCompanyId: String = "",
+    var createdAt:Long = 0,
+    var ETA: Long = 0,
+    var timeline: MutableList<DeliveryTimeLineModel> = mutableListOf()
 ) : Parcelable

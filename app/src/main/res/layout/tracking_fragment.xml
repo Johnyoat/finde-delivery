@@ -3,80 +3,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.track.TrackingFragment"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ui.track.TrackingFragment">
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        style="@style/Widget.AppCompat.Button.Borderless"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:alpha="0.8"
+        android:text="Track delivery"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/orderDate"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_alignStart="@id/title"
+        android:alpha="0.8"
+        android:text="Wed, 12 Sep" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/orderId"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/orderDate"
+        android:layout_alignStart="@id/title"
+        android:alpha="0.8"
+        android:text="Order Id: 12323343434" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Charge:"
+        android:layout_toStartOf="@id/charge"
+        android:layout_alignBaseline="@id/orderId"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/black"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GHS20"
+        android:id="@+id/charge"
         android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_close"
-        android:id="@+id/closeBtn"/>
+        android:layout_alignBaseline="@id/orderId"
+        android:layout_marginEnd="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
 
-   <LinearLayout
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:orientation="vertical"
-       android:gravity="center"
-       android:layout_centerInParent="true"
-       android:id="@+id/trackingUi">
-       <androidx.appcompat.widget.AppCompatImageView
-           android:layout_width="200dp"
-           android:layout_height="200dp"
-           android:layout_margin="16dp"
-           android:src="@drawable/ic_track_map"
-           android:layout_marginTop="-24dp"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ETA: 15min"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_below="@id/orderId"
+        android:layout_alignStart="@id/orderId"
+        android:layout_marginTop="16dp"
+        android:id="@+id/eta"/>
 
-       <androidx.appcompat.widget.AppCompatTextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:alpha="0.8"
-           android:text="Enter Tracking Id"
-           android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-           android:textStyle="bold" />
-
-       <androidx.appcompat.widget.AppCompatTextView
-           style="@style/TextAppearance.MaterialComponents.Body2"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:alpha="0.8"
-           android:text="Use tracking number to find status of delivery"/>
-
-
-       <androidx.appcompat.widget.AppCompatEditText
-           android:layout_width="match_parent"
-           android:layout_height="48dp"
-           android:background="@drawable/curve_edges"
-           android:paddingStart="8dp"
-           android:paddingEnd="8dp"
-           android:layout_marginTop="16dp"
-           android:layout_marginBottom="16dp"/>
-
-
-
-
-
-       <androidx.appcompat.widget.AppCompatButton
-           android:id="@+id/transactionBtn"
-           android:layout_width="wrap_content"
-           android:layout_height="48dp"
-           android:background="@drawable/curve_edges"
-           android:backgroundTint="@color/colorPrimary"
-           android:paddingStart="12dp"
-           android:paddingEnd="12dp"
-           android:text="Search"
-           android:textAllCaps="false"
-           android:textColor="@android:color/white" />
-   </LinearLayout>
-
-
-    <include layout="@layout/parcel_item"
-        android:id="@+id/parcelDetails"
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/trackingUi"
-        android:visibility="gone"/>
+        android:layout_below="@id/eta"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:id="@+id/deliveryTimeline"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_delivery_timeline"/>
 
 </RelativeLayout>

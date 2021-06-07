@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
 import com.finde.deliveryapp.R
 import com.finde.deliveryapp.databinding.HomeFragmentBinding
 import com.finde.deliveryapp.ext.load
@@ -107,7 +106,6 @@ class HomeFragment : Fragment() {
                 .withTitle("Location Permission")
                 .withMessage("Location permission is required for the app to work properly")
                 .withButtonText("Allow")
-                .withIcon(R.drawable.ic_location_pin)
                 .build()
         }
 

@@ -2,6 +2,7 @@ package com.finde.deliveryapp.ext
 
 import android.content.Context
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
@@ -19,6 +20,10 @@ fun Fragment.navigateToWithArgs(fragmentId: Int, args: Bundle) {
     this.requireActivity().findNavController(R.id.container).navigate(fragmentId, args)
 }
 
+
+fun AppCompatActivity.navigateToWithArgs(fragmentId: Int, args: Bundle) {
+    this.findNavController(R.id.container).navigate(fragmentId, args)
+}
 
 fun Fragment.popStack() {
     this.requireActivity().findNavController(R.id.container).popBackStack()

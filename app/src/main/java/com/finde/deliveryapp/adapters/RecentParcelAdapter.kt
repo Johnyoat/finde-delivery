@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.finde.deliveryapp.DeliveryActivity
 import com.finde.deliveryapp.R
+import com.finde.deliveryapp.ext.navigateToWithArgs
 import com.finde.deliveryapp.models.ParcelModel
 
 class RecentParcelAdapter(
@@ -47,12 +49,12 @@ class RecentParcelAdapter(
         holder.receiverName.text = receiverName
         holder.origin.text = parcel.origin
         holder.destination.text = parcel.destination
-        Glide.with(activity).load(parcel.packageImage).into(holder.packageImage)
+        if (parcel.packageImage.isNotEmpty()){
+            Glide.with(activity).load(parcel.packageImage).into(holder.packageImage)
+        }
 
         holder.itemView.setOnClickListener {
-            val i = Intent(activity,DeliveryActivity::class.java)
-            i.putExtra("parcel",parcel)
-            activity.startActivity(i)
+            activity.navigateToWithArgs(R.id.trackingFragment, bundleOf("parcel" to parcel))
         }
     }
 }
