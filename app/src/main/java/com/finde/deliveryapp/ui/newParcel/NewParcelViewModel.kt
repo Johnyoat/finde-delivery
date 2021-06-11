@@ -12,6 +12,7 @@ import java.lang.Exception
 
 class NewParcelViewModel : ViewModel() {
     private val apiService = APIService.create()
+    val deliveryCompany = MutableLiveData<BusinessModel>()
 
     fun getBusinesses(): LiveData<List<BusinessModel>> {
         val businesses = MutableLiveData<List<BusinessModel>>()
@@ -25,5 +26,10 @@ class NewParcelViewModel : ViewModel() {
         }
 
         return businesses
+    }
+
+
+    fun setUpDeliveryCompany(company: BusinessModel) {
+        this.deliveryCompany.value = company
     }
 }

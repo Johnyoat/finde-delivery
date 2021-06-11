@@ -56,7 +56,7 @@ class NewParcelFragment : Fragment() {
     private val storage = Firebase.storage
     private val storageRef = storage.reference
     private var fileUri: Uri? = null
-    private val viewModel: NewParcelViewModel by viewModels()
+    private val viewModel: NewParcelViewModel by viewModels(ownerProducer = { this })
     private val accountViewModel: AccountViewModel by viewModels()
     private var businesses = mutableListOf<BusinessModel>()
     private var isDestinationSelected = false
@@ -101,28 +101,28 @@ class NewParcelFragment : Fragment() {
 
         }
 
+        binding.deliveryCompany.setOnClickListener {
+            NewParcelDeliveryCompanySearchFragment(this.businesses).show(childFragmentManager, "NP")
+        }
+
 
         binding.itemType.setOnItemSelectedListener { _, _, _, item ->
             parcel.parcelType = item.toString()
         }
 
 
-        binding.deliveryCompany.setOnItemSelectedListener { _, position, _, item ->
-            parcel.deliveryCompanyName = item.toString()
-            parcel.deliveryCompanyId = businesses[position].id.toString()
-        }
-
         lat = arguments?.getDouble("lat")!!
         lng = arguments?.getDouble("lng")!!
 
 
-        viewModel.getBusinesses().observe(viewLifecycleOwner, { businesses ->
-            val businessList = mutableListOf<String>()
+        viewModel.getBusinesses().observe(this, { businesses ->
             this.businesses = businesses as MutableList<BusinessModel>
-            businesses.forEach { business ->
-                businessList.add(business.title)
-            }
-            binding.deliveryCompany.setItems(businessList)
+        })
+
+        viewModel.deliveryCompany.observe(this, { company ->
+            parcel.deliveryCompanyName = company.title
+            parcel.deliveryCompanyId = company.id.toString()
+            binding.deliveryCompany.text = company.title
         })
 
 
@@ -186,7 +186,13 @@ class NewParcelFragment : Fragment() {
             parcel.destination = binding.destination.text.toString()
             parcel.senderContact = phoneNumber
             parcel.createdAt = System.currentTimeMillis()
-            parcel.timeline.add(DeliveryTimeLineModel("Order Created Successfully",System.currentTimeMillis(),true))
+            parcel.timeline.add(
+                DeliveryTimeLineModel(
+                    "Order Created Successfully",
+                    System.currentTimeMillis(),
+                    true
+                )
+            )
 
             try {
                 GlobalScope.launch {
@@ -200,7 +206,7 @@ class NewParcelFragment : Fragment() {
                         Toast.makeText(requireContext(), "Parcel Request Added", Toast.LENGTH_SHORT)
                             .show()
                         popStack()
-                        ConfirmationFragment(true,parcel.id).show(childFragmentManager,"CF")
+                        ConfirmationFragment(true, parcel.id).show(childFragmentManager, "CF")
                     }
 
                 }
@@ -208,7 +214,7 @@ class NewParcelFragment : Fragment() {
 
             } catch (e: Exception) {
                 Timber.d(e.localizedMessage)
-                ConfirmationFragment(false,parcel.id).show(childFragmentManager,"CF")
+                ConfirmationFragment(false, parcel.id).show(childFragmentManager, "CF")
                 isProgressShown(false)
             }
 

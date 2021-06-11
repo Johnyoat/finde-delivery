@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,6 +21,8 @@ import com.finde.deliveryapp.ext.navigateTo
 import com.finde.deliveryapp.ext.navigateToWithArgs
 import com.finde.deliveryapp.ui.account.AccountViewModel
 import com.finde.deliveryapp.ui.editProfile.EditProfileFragment
+import com.google.android.gms.common.api.GoogleApi
+import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
@@ -33,14 +37,16 @@ class HomeFragment : Fragment() {
     private var location: Location? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val isCameraGranted = false
+//    private var mGoogleApiClient = GoogleApi
 
     private val viewModel: HomeViewModel by viewModels()
     private val accountViewModel: AccountViewModel by viewModels()
     private lateinit var binding: HomeFragmentBinding
 
-    companion object {
-        const val LOCATION_SETTING_REQUEST = 999
-    }
+    private val locationRequestContract =
+        registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
+            requestLocation()
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,9 +69,9 @@ class HomeFragment : Fragment() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         accountViewModel.getUser().observe(viewLifecycleOwner, { user ->
-            if (user == null){
-                EditProfileFragment().show(childFragmentManager,"PF")
-            }else{
+            if (user == null) {
+                EditProfileFragment().show(childFragmentManager, "PF")
+            } else {
                 binding.userProfile.load(requireContext(), user.profileUrl)
             }
         })
@@ -89,7 +95,7 @@ class HomeFragment : Fragment() {
             navigateTo(R.id.accountFragment)
         }
 
-        showEnableLocationSetting()
+        requestLocation()
     }
 
 
@@ -107,6 +113,8 @@ class HomeFragment : Fragment() {
 
     @SuppressLint("MissingPermission")
     private fun getUserLocation() {
+        fusedLocationClient
+            .requestLocationUpdates(null,null)
         if (!isCameraGranted) {
             DialogOnDeniedPermissionListener.Builder
                 .withContext(requireContext())
@@ -138,7 +146,7 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun showEnableLocationSetting() {
+    private fun requestLocation() {
         this.let {
             val locationRequest = LocationRequest.create()
             locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
@@ -158,10 +166,11 @@ class HomeFragment : Fragment() {
             task.addOnFailureListener { e ->
                 if (e is ResolvableApiException) {
                     try {
-                        // Handle result in onActivityResult()
-                        e.startResolutionForResult(requireActivity(),
-                            LOCATION_SETTING_REQUEST)
-                    } catch (sendEx: IntentSender.SendIntentException) { }
+                        locationRequestContract.launch(
+                            IntentSenderRequest.Builder(e.resolution).build()
+                        )
+                    } catch (sendEx: IntentSender.SendIntentException) {
+                    }
                 }
             }
         }

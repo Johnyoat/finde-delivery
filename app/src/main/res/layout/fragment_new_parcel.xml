@@ -200,16 +200,19 @@
                 android:textSize="12sp" />
 
 
-            <com.jaredrummler.materialspinner.MaterialSpinner
+
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/deliveryCompany"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/gray_border_line"
                 android:backgroundTint="@color/litGray"
-                android:inputType="phone"
-                android:padding="4dp"
-                android:paddingStart="8dp"
+                android:gravity="center_vertical"
+                android:padding="8dp"
+                android:text="Tap to Select Delivery company"
+                android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
