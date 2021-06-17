@@ -1,10 +1,12 @@
 package com.finde.deliveryapp.ui.homeFragment
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.IntentSender
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,23 +23,21 @@ import com.finde.deliveryapp.ext.navigateTo
 import com.finde.deliveryapp.ext.navigateToWithArgs
 import com.finde.deliveryapp.ui.account.AccountViewModel
 import com.finde.deliveryapp.ui.editProfile.EditProfileFragment
-import com.google.android.gms.common.api.GoogleApi
-import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.*
 import com.google.android.material.transition.MaterialFadeThrough
-import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 import java.util.*
 
 class HomeFragment : Fragment() {
 
     private var location: Location? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private val isCameraGranted = false
-//    private var mGoogleApiClient = GoogleApi
 
     private val viewModel: HomeViewModel by viewModels()
     private val accountViewModel: AccountViewModel by viewModels()
@@ -77,8 +77,6 @@ class HomeFragment : Fragment() {
         })
 
 
-
-
         binding.sendPackage.setOnClickListener {
             callNewParcel()
         }
@@ -94,8 +92,6 @@ class HomeFragment : Fragment() {
         binding.userProfile.setOnClickListener {
             navigateTo(R.id.accountFragment)
         }
-
-        requestLocation()
     }
 
 
@@ -111,37 +107,55 @@ class HomeFragment : Fragment() {
     }
 
 
+    private fun checkAndRequestLocation(): Unit {
+        Dexter.withContext(requireContext())
+            .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            .withListener(object : PermissionListener {
+                override fun onPermissionGranted(permission: PermissionGrantedResponse?) {
+                    requestLocation()
+                }
+
+                override fun onPermissionDenied(response: PermissionDeniedResponse?) {
+
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    request: PermissionRequest?,
+                    token: PermissionToken?
+                ) {
+
+                }
+            }).check()
+    }
+
+
     @SuppressLint("MissingPermission")
-    private fun getUserLocation() {
-        fusedLocationClient
-            .requestLocationUpdates(null,null)
-        if (!isCameraGranted) {
-            DialogOnDeniedPermissionListener.Builder
-                .withContext(requireContext())
-                .withTitle("Location Permission")
-                .withMessage("Location permission is required for the app to work properly")
-                .withButtonText("Allow")
-                .build()
-        }
+    private fun getUserLocation(locationRequest: LocationRequest) {
 
+        locationRequest.interval = 2 * 1000
 
-        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-            this.location = location
-            if (location == null) {
-                binding.location.text = "Location Disabled"
-                return@addOnSuccessListener
+        fusedLocationClient.requestLocationUpdates(locationRequest, object : LocationCallback() {
+            override fun onLocationResult(result: LocationResult) {
+                super.onLocationResult(result)
+
+                for (location in result.locations){
+                    this@HomeFragment.location = location
+                    if (location == null) {
+                        binding.location.text = "Location Disabled"
+                        return
+                    }
+                    val address = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(
+                        location.latitude,
+                        location.longitude,
+                        1
+                    )[0]
+                    binding.location.text = "${address.getAddressLine(0)}"
+
+                    fusedLocationClient.removeLocationUpdates(this)
+                }
+
             }
-
-
-            val address = Geocoder(requireContext(), Locale.getDefault()).getFromLocation(
-                location.latitude,
-                location.longitude,
-                1
-            )[0]
-
-            binding.location.text = "${address.getAddressLine(0)}"
-
-        }
+        }, Looper.getMainLooper())
 
     }
 
@@ -158,11 +172,12 @@ class HomeFragment : Fragment() {
                 .checkLocationSettings(builder.build())
 
             task.addOnSuccessListener { response ->
-                val states = response.locationSettingsStates
+                val states = response.locationSettingsStates!!
                 if (states.isLocationPresent) {
-                    getUserLocation()
+                    getUserLocation(locationRequest)
                 }
             }
+
             task.addOnFailureListener { e ->
                 if (e is ResolvableApiException) {
                     try {
@@ -174,6 +189,12 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        checkAndRequestLocation()
     }
 
 }
